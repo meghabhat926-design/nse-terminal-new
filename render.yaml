@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: nse-terminal-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn nse_analysis_api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: API_KEY
+        sync: false   # you enter this value in the Render dashboard; leave blank for an open API
